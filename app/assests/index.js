@@ -3,5 +3,6 @@ export default {
   takePic: require('./images/takePhoto.png'),
   goBack: require('./images/goBack.png'),
   cameraIcon: require('./images/cameraIcon.png'),
-  noImage:require('./images/noImageAvailable.png')
+  noImage:require('./images/noImageAvailable.png'),
+  closeImage:require('./images/x.png')
 };

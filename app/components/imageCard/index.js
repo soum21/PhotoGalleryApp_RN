@@ -1,10 +1,15 @@
 import React from 'react';
 import {Image, View, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
-import {getHeightRatio, getWidthByPercentage, getHeightByPercentage} from '../../configs/utils';
+import {getHeightRatio} from '../../configs/utils';
 
-const ImageCard = ({image, index, id}) => {
+const ImageCard = ({image, index, id, openModal}) => {
   const cardGap = 16;
   const cardWidth = (Dimensions.get('window').width - cardGap * 3) / 2;
+
+  const handleModal = () => {
+    openModal(image.imageName);
+  };
+
   return (
     <View
       style={[
@@ -15,7 +20,7 @@ const ImageCard = ({image, index, id}) => {
           marginLeft: index % 2 !== 0 ? cardGap : 0
         }
       ]}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleModal}>
         <Image style={[styles.cardView, {width: cardWidth}]} source={{uri: image.imageName}} />
       </TouchableOpacity>
     </View>
@@ -30,7 +35,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     justifyContent: 'center',
     alignItems: 'center'
-    // border: '1px solid black'
   }
 });
 

@@ -5,7 +5,7 @@ import ImageCard from '../imageCard';
 import allImages from '../../assests';
 
 
-const Gallery = ({images}) => {
+const Gallery = ({images,openModal}) => {
   if (!images.length) {
     return (
       <View
@@ -28,7 +28,7 @@ const Gallery = ({images}) => {
         justifyContent: 'center'
       }}>
       {images.map((image, i) => {
-        return <ImageCard index={i} image={image} id={image.id} key={image.id} />;
+        return <ImageCard index={i} image={image} id={image.id} key={image.id} openModal={openModal}/>;
       })}
     </View>
   );
