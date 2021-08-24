@@ -6,9 +6,15 @@ export default function globalReducer(state = globalStates, action) {
     case types.GET_IMAGES:
       return {
         ...state,
-        images: action.payload,
+        images: state.images,
         error: ''
       };
+    case types.SET_IMAGES:
+      return{
+        ...state,
+        images:[...state.images, action.payload],
+        error:''
+      }
     case types.ERROR_GETTING_IMAGES:
       return {
         ...state,

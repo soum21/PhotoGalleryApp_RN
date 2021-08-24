@@ -4691,6 +4691,16 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
 
+react-native-camera-hooks@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-camera-hooks/-/react-native-camera-hooks-0.5.1.tgz#0112611fb4fe3fd2c30832aa33bcb5a8cf735da2"
+
+react-native-camera@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-4.0.3.tgz#a75ab913db96604a2b4c62d392e0537e5f71f4bf"
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native@0.61.0:
   version "0.61.0"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.61.0.tgz"
