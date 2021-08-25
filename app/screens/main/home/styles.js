@@ -10,7 +10,7 @@ export default {
     backgroundColor: '#fff'
   },
   buttonBox: {
-    flex: 1,
+    flex: 2,
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',

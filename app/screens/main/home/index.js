@@ -7,6 +7,7 @@ import styles from './styles';
 import CamerModule from '../../../components/cameraModule';
 import Gallery from '../../../components/gallery';
 import ImageModal from '../../../components/imageModal';
+import PaginationComponent from '../../../components/pagination';
 
 import * as types from '../../../configs/redux/actionTypes';
 
@@ -14,12 +15,24 @@ import images from '../../../assests';
 
 const HomePage = () => {
   const [state, dispatch] = useContext(Context);
+
   const [showModal, setModal] = useState(false);
   const [modalImage, setModalImage] = useState(null);
+
   const [showCamera, setCameraModule] = useState(false);
 
+  const [allImages, setAllImages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
+
+  const [pageNumberLimit, setpageNumberLimit] = useState(4);
+  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(4);
+  const [minPageNumberLimit, setminPageNumberLimit] = useState(1);
+
+  const pages = [];
+
   const handleModalOpen = (data) => {
-    setModalImage(data)
+    setModalImage(data);
     setModal(true);
   };
 
@@ -37,6 +50,29 @@ const HomePage = () => {
 
   const fetchImage = () => {
     dispatch({type: types.GET_IMAGES});
+    setAllImages(state.images);
+  };
+
+  const handlePagination = (data) => {
+    setCurrentPage(data);
+  };
+
+  const doPrev = () => {
+    setCurrentPage(currentPage - 1);
+
+    if ((currentPage - 1) % pageNumberLimit === 0) {
+      setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
+  };
+
+  const doNext = () => {
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > maxPageNumberLimit) {
+      setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    }
   };
 
   useEffect(() => {
@@ -46,12 +82,32 @@ const HomePage = () => {
     };
   }, [state.images]);
 
+  for (let i = 1; i <= Math.ceil(allImages.length / itemsPerPage); i++) {
+    pages.push(i);
+  }
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const currentItems = allImages.slice(indexOfFirstItem, indexOfLastItem);
+
   const MainView = () => {
     return (
       <View style={styles.container}>
         <View style={styles.galleryArea}>
-          <Gallery images={state.images} openModal={handleModalOpen} />
-          <ImageModal showModal={showModal} handleModalClose={handleModalClose} modalImage={modalImage}/>
+          <Gallery images={currentItems} openModal={handleModalOpen} />
+          <ImageModal showModal={showModal} handleModalClose={handleModalClose} modalImage={modalImage} />
+        </View>
+        <View style={{flex: 1, alignItems: 'center', backgroundColor: '#fff'}}>
+          <PaginationComponent
+            pages={pages}
+            handlePagination={handlePagination}
+            currentPage={currentPage}
+            maxPageNumberLimit={maxPageNumberLimit}
+            minPageNumberLimit={minPageNumberLimit}
+            doPrev={doPrev}
+            doNext={doNext}
+          />
         </View>
         <View style={styles.buttonBox}>
           <TouchableOpacity onPress={handleOpenCamera} style={styles.roundButton1}>
