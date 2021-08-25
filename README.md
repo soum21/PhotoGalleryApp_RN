@@ -16,4 +16,4 @@ The applicaton was created using react-native-cli , below given the details of t
 
 - Please Open a Simulator or Connect your Device
 - Check adb devices
-- npx react-native run-android --deviceId= <deviceID>
+- npx react-native run-android --deviceId= yourDeviceID
