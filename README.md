@@ -9,7 +9,7 @@ The applicaton was created using react-native-cli , below given the details of t
 
 ## Dependencies Installation
 
-- Please git clone the repo: [Git Hub Repo](https://github.com/soum21/ebworx_assesment.git)
+- Please git clone the repo: [Git Hub Repo](https://github.com/soum21/PhotoGalleryApp_RN.git)
 - Next run command `yarn install` in the root directory
 
 ## Running the App
