@@ -1,5 +1,5 @@
 import React, {useState, useContext, useCallback} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {useCamera} from 'react-native-camera-hooks';
 import {Context} from '../../configs/context';
@@ -7,15 +7,16 @@ import {getHeightRatio, getWidthByPercentage, getHeightByPercentage} from '../..
 import images from '../../assests';
 import * as types from '../../configs/redux/actionTypes';
 
+
 const CameraModule = ({handleCloseCamera}) => {
   const [state, dispatch] = useContext(Context);
 
   const [{cameraRef}, {takePicture}] = useCamera(null);
   const [flipType, setFlipType] = useState(RNCamera.Constants.Type.back);
 
-  const handleBack = () =>{
+  const handleBack = () => {
     handleCloseCamera();
-  }
+  };
 
   const generateRandomNumber = () => {
     let val = Math.floor(100000000 + Math.random() * 900000000);
@@ -41,7 +42,7 @@ const CameraModule = ({handleCloseCamera}) => {
           imageName: data.uri,
           base64: data.base64
         };
-        dispatch({type: types.SET_IMAGES, payload:imageData});
+        dispatch({type: types.SET_IMAGES, payload: imageData});
         handleCloseCamera();
       }
     } catch (err) {
@@ -67,9 +68,6 @@ const CameraModule = ({handleCloseCamera}) => {
 
   return (
     <View style={styles.body}>
-      {/* <View style={styles.backDrop}>
-      <ActivityIndicator size="large" color="#0000ff" />
-      </View> */}
       <RNCamera ref={cameraRef} type={flipType} style={styles.cameraPreview} captureAudio={false}>
         <CameraButtons />
       </RNCamera>
@@ -107,14 +105,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 100,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderWidth: 3,
-    borderColor: "darkorange"
+    borderColor: 'darkorange'
   },
   imageIcon: {
     width: getHeightRatio(50),
     height: getHeightRatio(50)
   }
 });
+
 
 export default CameraModule;
